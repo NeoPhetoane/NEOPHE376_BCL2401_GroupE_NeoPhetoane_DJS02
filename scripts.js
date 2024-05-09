@@ -1,5 +1,6 @@
 const form = document.querySelector("[data-form]");
 const result = document.querySelector("[data-result]");
+const criticalErrorDiv = document.querySelector('.critical-error');
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -16,12 +17,13 @@ form.addEventListener("submit", (event) => {
   if (divider === "0") {
     result.innerText =
       "Division not performed. Invalid number provided. Try again";
+      result.classList.add("error-message")// Applies css to the results of the if statement.
     console.error("Division by zero not permitted", new Error().stack);//Throws error to console, so the developer and user know exactly what the issue is.
     return; //Prevents program from crashing by stopping the function from calculating with a 0 in the equation.
   }
 
   if (isNaN(dividend) || isNaN(divider)) { //Checks if the input is not a number.
-    document.body.innerHTML = "<div>Something critical went wrong. Please reload the page</div>" //InnerHTML is used to diplay text on the page without altering the HTML
+   criticalErrorDiv.style.display = 'block'; //Prompts the css to display.
     console.error("Invalid input provided", new Error().stack);
     return;
   }
