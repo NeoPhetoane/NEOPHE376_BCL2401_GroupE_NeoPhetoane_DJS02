@@ -20,6 +20,12 @@ form.addEventListener("submit", (event) => {
     return; //Prevents program from crashing by stopping the function from calculating with a 0 in the equation.
   }
 
+  if (isNaN(dividend) || isNaN(divider)) { //Checks if the input is not a number.
+    document.body.innerHTML = "<div>Something critical went wrong. Please reload the page</div>" //InnerHTML is used to diplay text on the page without altering the HTML
+    console.error("Invalid input provided", new Error().stack);
+    return;
+  }
+
   const finalCalculation = Math.trunc(dividend / divider); //Rounds off the result and a variable is created for readability.
   result.innerText = finalCalculation;
 });
