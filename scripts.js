@@ -7,9 +7,17 @@ form.addEventListener("submit", (event) => {
   const { dividend, divider } = Object.fromEntries(entries);
 
   //Checks if the input fields are empty, and if they are, it sends out a message to fill them in.
-  if (!dividend || !divider) { 
-    result.innerHTML = "Division not performed. Both values are required in inputs. Try again";
+  if (!dividend || !divider) {
+    result.innerText =
+      "Division not performed. Both values are required in inputs. Try again";
     return;
+  }
+
+  if (divider === "0") {
+    result.innerText =
+      "Division not performed. Invalid number provided. Try again";
+    console.error("Division by zero not permitted", new Error().stack);//Throws error to console, so the developer and user know exactly what the issue is.
+    return; //Prevents program from crashing by stopping the function from calculating with a 0 in the equation.
   }
 
   const finalCalculation = Math.trunc(dividend / divider); //Rounds off the result and a variable is created for readability.
